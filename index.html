@@ -7,7 +7,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
-
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
 
@@ -59,16 +59,6 @@
             </a>
             <div class="navbar-nav me-auto py-0">
                 <a href="project.html" class="nav-item nav-link">Projects</a>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                    <div class="dropdown-menu rounded-0 shadow-sm border-0 m-0">
-                        <a href="feature.html" class="dropdown-item">Features</a>
-                        <a href="team.html" class="dropdown-item">Our Team</a>
-                        <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                        <a href="404.html" class="dropdown-item">404 Page</a>
-                    </div>
-                </div>
-                <a href="contact.html" class="nav-item nav-link">Contact</a>
             </div>
             <div class="navbar-nav me-auto py-0">
                 <div class="user" id="loggedInUser">
@@ -135,6 +125,52 @@
     </div>
     <!-- Video Modal End -->
 
+<!-- Popup Modal Start -->
+<div class="modal fade" id="popupModal" tabindex="-1" aria-labelledby="popupModalLabel" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="popupModalLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <!-- Bootstrap Form Start -->
+                <form>
+                    <div class="mb-3">
+                        <label for="inputName" class="form-label">Name</label>
+                        <input type="text" name="name" class="form-control" id="inputName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputEmail" class="form-label">Email address</label>
+                        <input type="email" name="mail" class="form-control" id="inputEmail" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputPhone" class="form-label">Phone Number</label>
+                        <input type="tel" name="phone" class="form-control" id="inputPhone" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputDescription" class="form-label">Description</label>
+                        <textarea class="form-control" name="desc" id="inputDescription" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputFromDate" class="form-label">From Date</label>
+                        <input type="date" class="form-control" name="from" id="inputFromDate" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputToDate" class="form-label">To Date</label>
+                        <input type="date" class="form-control" name="to" id="inputToDate" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            <!-- Bootstrap Form End -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Popup Modal End -->
 
     <!-- About Start -->
     <div class="container-xxl py-5">
@@ -223,11 +259,12 @@
             </div>
             <div class="row g-3">
                 <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="service-item d-flex flex-column bg-white p-3 pb-0">
+                    <div class="service-item d-flex flex-column bg-white p-3 pb-0" id="bookWedding">
                         <div class="position-relative">
                             <img class="img-fluid" src="img/service-1.jpg" alt="">
                             <div class="service-overlay">
-                                <a class="btn btn-lg-square btn-outline-light rounded-circle" href=""><i class="fa fa-link text-primary"></i></a>
+                                <button type="button" class="btn btn-outline-light"  data-bs-toggle="modal"
+                                data-bs-target="#popupModal" data-pop-type="Weddings">Book now</button>
                             </div>
                         </div>
                         <div class="text-center p-4">
@@ -236,11 +273,12 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 pt-lg-5 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="service-item d-flex flex-column bg-white p-3 pb-0">
+                    <div class="service-item d-flex flex-column bg-white p-3 pb-0" id="bookPortraits">
                         <div class="position-relative">
                             <img class="img-fluid" src="img/service-2.jpg" alt="">
                             <div class="service-overlay">
-                                <a class="btn btn-lg-square btn-outline-light rounded-circle" href=""><i class="fa fa-link text-primary"></i></a>
+                                <button type="button" class="btn btn-outline-light" i data-bs-toggle="modal"
+                                data-bs-target="#popupModal" data-pop-type="Portraits">Book now</button>
                             </div>
                         </div>
                         <div class="text-center p-4">
@@ -249,11 +287,12 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="service-item d-flex flex-column bg-white p-3 pb-0">
+                    <div class="service-item d-flex flex-column bg-white p-3 pb-0" id="bookFashion">
                         <div class="position-relative">
                             <img class="img-fluid" src="img/service-3.jpg" alt="">
                             <div class="service-overlay">
-                                <a class="btn btn-lg-square btn-outline-light rounded-circle" href=""><i class="fa fa-link text-primary"></i></a>
+                                <button type="button" class="btn btn-outline-light"  data-bs-toggle="modal"
+                                data-bs-target="#popupModal" data-pop-type="Fashion">Book now</button>
                             </div>
                         </div>
                         <div class="text-center p-4">
@@ -262,11 +301,12 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 pt-lg-5 wow fadeInUp" data-wow-delay="0.7s">
-                    <div class="service-item d-flex flex-column bg-white p-3 pb-0">
+                    <div class="service-item d-flex flex-column bg-white p-3 pb-0" d="bookEditorial">
                         <div class="position-relative">
                             <img class="img-fluid" src="img/service-4.jpg" alt="">
                             <div class="service-overlay">
-                                <a class="btn btn-lg-square btn-outline-light rounded-circle" href=""><i class="fa fa-link text-primary"></i></a>
+                                <button type="button" class="btn btn-outline-light" idata-bs-toggle="modal"
+                                data-bs-target="#popupModal" data-pop-type="Editorial">Book now</button>
                             </div>
                         </div>
                         <div class="text-center p-4">
@@ -614,6 +654,7 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <script src="js/booking.js"></script>
 </body>
 
 </html>

@@ -256,7 +256,16 @@
 }
 
 .service-item:hover * {
-    color: var(--light);
+    color: #FFFFFF;
+}
+.booked {
+    margin-top: -10px;
+    background: var(--primary) !important;
+}
+
+.service-item:hover .btn-outline-light {
+    background-color: #EAA636;
+    border: 1px solid #EAA636;
 }
 
 .service-item .service-overlay {

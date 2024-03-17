@@ -25,6 +25,35 @@
         }
     });
 
+    if (localStorage.getItem('bookedService') === null){
+        localStorage.setItem('bookedService', JSON.stringify([]));
+    } else {
+        var bookedService = JSON.parse(localStorage.getItem('bookedService'));
+        bookedService.forEach(service => {
+            switch (service) {
+                case "Book Weddings":
+                    $("#bookWedding").addClass("booked");
+                    $("#bookWedding .btn").text("Booked");
+                    $("#bookWedding .btn").prop("disabled", true);
+                    break;
+                case "Book Portraits":
+                    $("#bookPortraits").addClass("booked");
+                    $("#bookPortraits .btn").text("Booked");
+                    $("#bookPortraits .btn").prop("disabled", true);
+                    break;
+                case "Book Fashion":
+                    $("#bookFashion").addClass("booked");
+                    $("#bookFashion .btn").text("Booked");
+                    $("#bookFashion .btn").prop("disabled", true);
+                    break;
+                case "Book Editorial":
+                    $("#bookEditorial").addClass("booked");
+                    $("#bookEditorial .btn").text("Booked");
+                    $("#bookEditorial .btn").prop("disabled", true);
+                    break;
+            }
+        });
+    }
 
     // Modal Video
     var $videoSrc;
@@ -90,18 +119,11 @@
     var signUpSubmit = $('#signUp');
     var mail = $('#userMail');
 
-    var cookies = document.cookie;
-    var cookieMail = '';
-{    if (cookies !== '') {
-        var cookieParams = cookies.split(';');
-        cookieParams.forEach(param => {
-            if(param.includes('email')){
-                var mailParam = param.split("=");
-                mail.val(mailParam[1]);
-                cookieMail = mailParam[1];
-            }
-        })
-    }}
+    
+    var cookieMail = localStorage.getItem('userMail');
+    if (cookieMail) {
+        mail.val(cookieMail);
+    }
 
     if ($('#email').is('*')) {
         $('#email').val(mail.val());
@@ -110,15 +132,32 @@
 
     var userProf = $("#loggedInUser .user-name");
 
-    if (cookieMail !== '') {
+    if (cookieMail) {
         userProf.text(("@" +cookieMail));
     }
 
+    if (localStorage.getItem('userMail') != null){
+        signUpSubmit.text('Sign out');   
+    }
+
+
     signUpSubmit.on('click', function () {
-        if (mail.val() !== '' && mail.val() !== cookieMail){
-            alert('Thank you for signing up!');
-            document.cookie = "email=" + mail.val() + ";";
-        } 
+        if (localStorage.getItem('userMail') != null){
+            var confirm = window.confirm("Are you sure you want to sign out?");
+            if (confirm){
+                localStorage.clear();
+                location.reload();
+            }
+        } else {
+            if (mail.val() !== '' && mail.val() !== cookieMail){
+                alert('Thank you for signing up!');
+                localStorage.setItem('userMail', mail.val());
+                userProf.text(("@" +localStorage.getItem('userMail')));
+                mail.val(localStorage.getItem('userMail'));
+                $(this).text('Sign out');
+            } 
+        }
+
 
     });
 
