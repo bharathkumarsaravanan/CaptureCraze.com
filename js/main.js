@@ -150,11 +150,21 @@
             }
         } else {
             if (mail.val() !== '' && mail.val() !== cookieMail){
-                alert('Thank you for signing up!');
                 localStorage.setItem('userMail', mail.val());
                 userProf.text(("@" +localStorage.getItem('userMail')));
                 mail.val(localStorage.getItem('userMail'));
                 $(this).text('Sign out');
+
+                $.ajax('http://localhost:4000/signin', {
+                    type: 'POST',
+                    data: JSON.stringify({mail: mail.val()}),
+                    contentType: 'application/json'
+                }).done(function() {
+                    alert('Thank you for signing up!');
+                }).fail(function(error) {
+                    alert('Oops... ' + JSON.stringify(error));
+                });
+        
             } 
         }
 
