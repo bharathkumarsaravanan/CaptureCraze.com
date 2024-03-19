@@ -84,14 +84,30 @@ app.post("/:mail/booking/data/delete", function(req,res) {
         res.status(500).send('oops');  
         console.log('error', error);  
     });
-    // knex('bookings').select('*').where('email', id).andWhere('service', service).then(function(data) {
-    //     console.log(data);
-    //     res.status(200).send(data);
-    // }).catch(function(error) {
-    //     res.status(500).send('oops');  
-    //     console.log('error', error);  
-    // })
-})
+});
+
+app.post("/:mail/booking/data/update", function(req,res) {
+    var id = req.params.mail;
+    var service = req.body.service;
+    var bookingDet = req.body;
+    knex('bookings')
+    .where('email', id)
+    .andWhere('service', service)
+    .update({
+        name: bookingDet.name,
+        phone: bookingDet.phone,
+        from_date: bookingDet.from_date,
+        to_date: bookingDet.to_date
+    })
+    .then(function() {
+        console.log(`Updated booking for email ${id} and service ${service}`);
+        res.status(200).send('Updated successfully');
+    })
+    .catch(function(error) {
+        res.status(500).send('oops');  
+        console.log('error', error);  
+    });
+});
 
 app.listen(4000,function(){
     console.log('localhost:4000');

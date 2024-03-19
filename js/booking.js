@@ -9,6 +9,10 @@
             console.log(service);
             var modalHeader = $("#popupModal #popupModalLabel");
             modalHeader.text("Book " + service);
+            if (localStorage.getItem('userMail')) {
+                var mail = localStorage.getItem('userMail');
+                $('#popupModal #inputEmail').val(mail);
+            }
         });
     
     var editBtn = $(".service-item .btn:nth-child(2)");
@@ -61,31 +65,58 @@
                 return bservice !== service;
             });
 
-localStorage.setItem("bookedService", JSON.stringify(bookedServices));
+        localStorage.setItem("bookedService", JSON.stringify(bookedServices));
 
-            switch (service) {
-                case "Book Weddings":
-                    $("#bookWedding").removeClass("booked");
-                    $("#bookWedding .btn:first-child").text("Book Now");
-                    $("#bookWedding .btn:first-child").prop("disabled", false);
-                    break;
-                case "Book Portraits":
-                    $("#bookPortraits").removeClass("booked");
-                    $("#bookPortraits .btn:first-child").text("Book Now");
-                    $("#bookPortraits .btn:first-child").prop("disabled", false);
-                    break;
-                case "Book Fashion":
-                    $("#bookFashion").addClass("booked");
-                    $("#bookFashion .btn-firsr-child").text("Booked");
-                    $("#bookFashion .btn:first-child").prop("disabled", false);
-                    break;
-                case "Book Editorial":
-                    $("#bookEditorial").removeClass("booked");
-                    $("#bookEditorial .btn:first-child").text("Book Now");
-                    $("#bookEditorial .btn:first-child").prop("disabled", false);
-                    break;
+        switch (service) {
+            case "Book Weddings":
+                $("#bookWedding").removeClass("booked");
+                $("#bookWedding .btn:first-child").text("Book Now");
+                $("#bookWedding .btn:first-child").prop("disabled", false);
+                break;
+            case "Book Portraits":
+                $("#bookPortraits").removeClass("booked");
+                $("#bookPortraits .btn:first-child").text("Book Now");
+                $("#bookPortraits .btn:first-child").prop("disabled", false);
+                break;
+            case "Book Fashion":
+                $("#bookFashion").addClass("booked");
+                $("#bookFashion .btn-firsr-child").text("Booked");
+                $("#bookFashion .btn:first-child").prop("disabled", false);
+                break;
+            case "Book Editorial":
+                $("#bookEditorial").removeClass("booked");
+                $("#bookEditorial .btn:first-child").text("Book Now");
+                $("#bookEditorial .btn:first-child").prop("disabled", false);
+                break;
+        }
+
+        }).fail(function(error) {
+            alert('Oops... ' + JSON.stringify(error));
+        });
+    });
+
+    $("#editPop form").on("submit", function(event){
+        event.preventDefault();
+        var formData = $(this).serializeArray();
+        var service = $("#editPop #popupModalLabel").text();
+        var mail = localStorage.getItem("userMail");
+        var orderData = {
+                name: formData.find(item => item.name === 'name').value,
+                mail: formData.find(item => item.name === 'mail').value,
+                from_date: formData.find(item => item.name === 'from').value,
+                to_date: formData.find(item => item.name === 'to').value,
+                phone: formData.find(item => item.name === 'phone').value,
+                desc: formData.find(item => item.name === 'desc').value,
+                service: service
             }
 
+        $.ajax('http://localhost:4000/'+mail+'/booking/data/update', {
+            type: 'POST',
+            data: JSON.stringify(orderData),
+            contentType: 'application/json'
+        }).done(function() {
+            alert('Your booking has been updated');
+            console.log('data has stored in db');
         }).fail(function(error) {
             alert('Oops... ' + JSON.stringify(error));
         });
@@ -96,6 +127,8 @@ localStorage.setItem("bookedService", JSON.stringify(bookedServices));
 
         var formData = $(this).serializeArray();
         var service = $("#popupModal #popupModalLabel").text();
+
+  
 
         var data = {
             service_id: 'service_ia9z3tq',
