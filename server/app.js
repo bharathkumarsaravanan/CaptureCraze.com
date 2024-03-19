@@ -33,6 +33,66 @@ app.post("/signin", function(req, res) {
     })
 });
 
+app.post("/:mail/booking", function(req,res) {
+    var id = req.params.mail;
+    var bookingDet = req.body;
+    
+
+    knex.insert({
+        user_id: id,
+        name: bookingDet.name,
+        phone: bookingDet.phone,
+        email: bookingDet.mail,
+        from_date: bookingDet.from_date,
+        to_date: bookingDet.to_date,
+        service: bookingDet.service
+    }).into('bookings').then(function() {
+        console.log(`User with id ${id} booked.`);
+        res.status(200).send('Response 2');
+    }).catch(function(error) {
+        res.status(500).send('oops');  
+        console.log('error', error);  
+    })
+})
+
+app.post("/:mail/booking/data", function(req,res) {
+    var id = req.params.mail;
+    var service = req.body.service;
+    knex('bookings').select('*').where('email', id).andWhere('service', service).then(function(data) {
+        console.log(data);
+        res.status(200).send(data);
+    }).catch(function(error) {
+        res.status(500).send('oops');  
+        console.log('error', error);  
+    })
+})
+
+app.post("/:mail/booking/data/delete", function(req,res) {
+    var id = req.params.mail;
+    var service = req.body.service;
+    console.log(id, service);
+    
+    knex('bookings')
+    .where('email', id)
+    .andWhere('service', service)
+    .del()
+    .then(function() {
+        console.log(`Deleted booking for email ${id} and service ${service}`);
+        res.status(200).send('Deleted successfully');
+    })
+    .catch(function(error) {
+        res.status(500).send('oops');  
+        console.log('error', error);  
+    });
+    // knex('bookings').select('*').where('email', id).andWhere('service', service).then(function(data) {
+    //     console.log(data);
+    //     res.status(200).send(data);
+    // }).catch(function(error) {
+    //     res.status(500).send('oops');  
+    //     console.log('error', error);  
+    // })
+})
+
 app.listen(4000,function(){
     console.log('localhost:4000');
 })

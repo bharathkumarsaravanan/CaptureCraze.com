@@ -172,6 +172,53 @@
 </div>
 <!-- Popup Modal End -->
 
+<!-- Edit Popup Modal Start -->
+<div class="modal fade" id="editPop" tabindex="-1" aria-labelledby="popupModalLabel" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="popupModalLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <!-- Bootstrap Form Start -->
+                <form>
+                    <div class="mb-3">
+                        <label for="inputName" class="form-label">Name</label>
+                        <input type="text" name="name" class="form-control" id="inputName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputEmail" class="form-label">Email address</label>
+                        <input type="email" name="mail" class="form-control" id="inputEmail" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputPhone" class="form-label">Phone Number</label>
+                        <input type="tel" name="phone" class="form-control" id="inputPhone" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputDescription" class="form-label">Description</label>
+                        <textarea class="form-control" name="desc" id="inputDescription" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputFromDate" class="form-label">From Date</label>
+                        <input type="date" class="form-control" name="from" id="inputFromDate" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputToDate" class="form-label">To Date</label>
+                        <input type="date" class="form-control" name="to" id="inputToDate" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            <!-- Bootstrap Form End -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" id="delSlot" data-bs-dismiss="modal">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Edit Popup Modal End -->
     <!-- About Start -->
     <div class="container-xxl py-5">
         <div class="container">
@@ -265,6 +312,8 @@
                             <div class="service-overlay">
                                 <button type="button" class="btn btn-outline-light"  data-bs-toggle="modal"
                                 data-bs-target="#popupModal" data-pop-type="Weddings">Book now</button>
+                                <button type="button" class="btn btn-outline-light edit-btn"  data-bs-toggle="modal"
+                                data-bs-target="#editPop" data-pop-type="Weddings">Edit</button>
                             </div>
                         </div>
                         <div class="text-center p-4">

@@ -254,6 +254,12 @@
     margin-top: -10px;
     background: var(--primary) !important;
 }
+.service-item.booked:hover .edit-btn {
+    display: block;
+}
+.service-item .edit-btn {
+    display: none;
+}
 
 .service-item:hover * {
     color: #FFFFFF;

@@ -33,23 +33,23 @@
             switch (service) {
                 case "Book Weddings":
                     $("#bookWedding").addClass("booked");
-                    $("#bookWedding .btn").text("Booked");
-                    $("#bookWedding .btn").prop("disabled", true);
+                    $("#bookWedding .btn:first-child").text("Booked");
+                    $("#bookWedding .btn:first-child").prop("disabled", true);
                     break;
                 case "Book Portraits":
                     $("#bookPortraits").addClass("booked");
-                    $("#bookPortraits .btn").text("Booked");
-                    $("#bookPortraits .btn").prop("disabled", true);
+                    $("#bookPortraits .btn:first-child").text("Booked");
+                    $("#bookPortraits .btn:first-child").prop("disabled", true);
                     break;
                 case "Book Fashion":
                     $("#bookFashion").addClass("booked");
-                    $("#bookFashion .btn").text("Booked");
-                    $("#bookFashion .btn").prop("disabled", true);
+                    $("#bookFashion .btn:first-child").text("Booked");
+                    $("#bookFashion .btn:first-child").prop("disabled", true);
                     break;
                 case "Book Editorial":
                     $("#bookEditorial").addClass("booked");
-                    $("#bookEditorial .btn").text("Booked");
-                    $("#bookEditorial .btn").prop("disabled", true);
+                    $("#bookEditorial .btn:first-child").text("Booked");
+                    $("#bookEditorial .btn:first-child").prop("disabled", true);
                     break;
             }
         });
@@ -149,6 +149,7 @@
                 location.reload();
             }
         } else {
+            debugger
             if (mail.val() !== '' && mail.val() !== cookieMail){
                 localStorage.setItem('userMail', mail.val());
                 userProf.text(("@" +localStorage.getItem('userMail')));
